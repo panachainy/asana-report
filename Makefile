@@ -19,3 +19,6 @@ version:
 install:
 	install -d -m 755 '$(HOME)/bin/'
 	install $(PATH_BUILD)$(VERSION)/$(FILE_ARCH)/$(FILE_COMMAND) '$(HOME)/bin/$(FILE_COMMAND)'
+
+try:
+	asana-report version
