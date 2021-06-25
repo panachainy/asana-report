@@ -41,3 +41,12 @@ Run
 ```sh
 ./asana-report serve
 ```
+
+### CLI
+
+Get version
+
+```sh
+go run main.go version
+```
+
