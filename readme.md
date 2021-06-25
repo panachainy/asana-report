@@ -43,10 +43,9 @@ make install
 Try Run
 
 ```sh
-asana-report version
+make try
 ```
 
 ## REF
 
 https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/
-
