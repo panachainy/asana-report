@@ -15,7 +15,7 @@ limitations under the License.
 */
 package main
 
-import "github.com/spf13/asana-report/cmd"
+import "asana-report/cmd"
 
 func main() {
 	cmd.Execute()

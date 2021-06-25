@@ -14,3 +14,9 @@ cobra add serve
 cobra add config
 cobra add create -p 'configCmd'
 ```
+
+## Getting stared
+
+```sh
+go run main.go
+```
