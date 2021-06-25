@@ -22,31 +22,27 @@ cobra add create -p 'configCmd'
 
 ### Development
 
-Run
+Run with development
 
 ```sh
 go run main.go
 ```
 
-### Publish way
-
-Publish
+Build
 
 ```sh
-publish.sh
+make build
 ```
 
-Run
+Install
 
 ```sh
-./asana-report serve
+make install
 ```
 
-### CLI
-
-Get version
+Try Run
 
 ```sh
-go run main.go version
+asana-report version
 ```
 
