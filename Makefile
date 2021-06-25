@@ -8,10 +8,10 @@ clean:
 
 build: clean
 	@$(GOPATH)/bin/goxc \
-    -bc="darwin,amd64" \
-    -pv=$(VERSION) \
-    -d=$(PATH_BUILD) \
-    -build-ldflags "-X main.VERSION=$(VERSION)"
+		-bc="darwin,amd64" \
+		-pv=$(VERSION) \
+		-d=$(PATH_BUILD) \
+		-build-ldflags "-X main.VERSION=$(VERSION)"
 
 version:
 	@echo $(VERSION)
