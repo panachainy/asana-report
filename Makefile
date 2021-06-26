@@ -1,6 +1,6 @@
 VERSION=0.0.1
 PATH_BUILD=build/
-FILE_COMMAND=ar
+FILE_COMMAND=asana-report
 FILE_ARCH=darwin_amd64
 
 clean:
@@ -21,4 +21,4 @@ install:
 	install $(PATH_BUILD)$(VERSION)/$(FILE_ARCH)/$(FILE_COMMAND) '$(HOME)/bin/$(FILE_COMMAND)'
 
 try:
-	~/bin/ar version
+	~/bin/asana-report version
