@@ -10,11 +10,11 @@ cobra init --pkg-name github.com/spf13/newApp
 ### Cobra add
 
 ```sh
-# ./asana-report serve
+# ./ar serve
 cobra add serve
-# ./asana-report config
+# ./ar config
 cobra add config
-# add cmd with Subcommand call with `./asana-report config create`
+# add cmd with Subcommand call with `./ar config create`
 cobra add create -p 'configCmd'
 ```
 
