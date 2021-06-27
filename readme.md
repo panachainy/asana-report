@@ -48,4 +48,6 @@ make try
 
 ## REF
 
-https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/
+* https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/
+
+* https://github.com/KEINOS/Hello-Cobra
