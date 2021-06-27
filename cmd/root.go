@@ -20,7 +20,7 @@ var rootCmd = &cobra.Command{
 	You can get summary of task and status.`,
 }
 
-var VERSION string
+var VERSION string = "development"
 
 func Execute(version string) {
 	VERSION = version

@@ -1,16 +1,14 @@
 package cmd
 
 import (
-	"asana-report/cmd"
 	"bytes"
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
 
 func Test_versionCmd(t *testing.T) {
-	cmd.VERSION = "0.0.0"
+	// cmd.VERSION = "0.0.0"
 
 	var (
 		versionCmd = createVersionCmd()
@@ -28,17 +26,11 @@ func Test_versionCmd(t *testing.T) {
 		assert.FailNowf(t, "Failed to execute 'helloCmd.Execute()'.", "Error msg: %v", err)
 	}
 
-	// expect = "asana-report" + " " + `\n`
-	expect = "asana-report\n"
+	expect = "asana-report development\n"
 
 	actual = buffTmp.String()
 
-	fmt.Println("actual =========================")
-	fmt.Println(actual)
-	fmt.Println("expect =========================")
-	fmt.Println(expect)
-
 	assert.Equal(t, expect, actual,
-		"Command 'asana-report' should return empty.",
+		"Command 'asana-report' should return 'asana-report development'.",
 	)
 }
