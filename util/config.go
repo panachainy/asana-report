@@ -1,15 +1,50 @@
 package util
 
 import (
+	"fmt"
+	"os"
 	"reflect"
 	"strings"
 
+	"github.com/mitchellh/go-homedir"
+	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
 
 type Config struct {
 	ProjectBase string `mapstructure:"project_base"`
 	Port        string `mapstructure:"port"`
+}
+
+func Init(cfgFile string, config *Config, prefix string) {
+	if cfgFile != "" {
+		// Use config file from the flag.
+		viper.SetConfigFile(cfgFile)
+	} else {
+		// Find home directory.
+		home, err := homedir.Dir()
+		cobra.CheckErr(err)
+
+		// Search config in home directory with name ".asar" (without extension).
+		viper.AddConfigPath(home)
+		viper.SetConfigName(".asar")
+	}
+
+	viper.SetEnvPrefix(prefix)
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+
+	viper.AutomaticEnv()
+
+	// If a config file is found, read it in.
+	if err := viper.ReadInConfig(); err == nil {
+		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+	}
+	BindEnvs(*config)
+
+	err := viper.Unmarshal(&config)
+	if err != nil {
+		fmt.Printf("unable to decode into struct, %v", err)
+	}
 }
 
 func BindEnvs(iface interface{}, parts ...string) {

@@ -2,14 +2,8 @@ package cmd
 
 import (
 	"asana-report/util"
-	"fmt"
-	"os"
-	"strings"
 
-	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
-
-	"github.com/spf13/viper"
 )
 
 var cfgFile string
@@ -40,35 +34,6 @@ func init() {
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-// initConfig reads in config file and ENV variables if set.
 func initConfig() {
-	if cfgFile != "" {
-		// Use config file from the flag.
-		viper.SetConfigFile(cfgFile)
-	} else {
-		// Find home directory.
-		home, err := homedir.Dir()
-		cobra.CheckErr(err)
-
-		// Search config in home directory with name ".asar" (without extension).
-		viper.AddConfigPath(home)
-		viper.SetConfigName(".asar")
-	}
-
-	viper.SetEnvPrefix(rootCmd.Use)
-	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-
-	viper.AutomaticEnv()
-
-	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
-	}
-
-	util.BindEnvs(CONFIG)
-
-	err := viper.Unmarshal(&CONFIG)
-	if err != nil {
-		fmt.Printf("unable to decode into struct, %v", err)
-	}
+	util.Init(cfgFile, &CONFIG, rootCmd.Use)
 }
