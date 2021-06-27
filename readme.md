@@ -48,6 +48,16 @@ Try Run
 make try
 ```
 
+### ENV
+
+Must set prefix when you set config with env.
+
+Example
+
+```env
+export ASAR_PROJECT_BASE=te222234123123
+```
+
 ## REF
 
 * https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/

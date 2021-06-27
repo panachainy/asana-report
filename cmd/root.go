@@ -1,12 +1,14 @@
 package cmd
 
 import (
+	"asana-report/util"
 	"fmt"
 	"os"
+	"strings"
 
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 )
 
@@ -20,7 +22,10 @@ var rootCmd = &cobra.Command{
 	You can get summary of task and status.`,
 }
 
-var VERSION string = "development"
+var (
+	VERSION string = "development"
+	CONFIG  util.Config
+)
 
 func Execute(version string) {
 	VERSION = version
@@ -50,10 +55,20 @@ func initConfig() {
 		viper.SetConfigName(".asar")
 	}
 
-	viper.AutomaticEnv() // read in environment variables that match
+	viper.SetEnvPrefix(rootCmd.Use)
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
+
+	viper.AutomaticEnv()
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
+	}
+
+	util.BindEnvs(CONFIG)
+
+	err := viper.Unmarshal(&CONFIG)
+	if err != nil {
+		fmt.Printf("unable to decode into struct, %v", err)
 	}
 }
