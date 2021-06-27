@@ -8,8 +8,6 @@ import (
 )
 
 func Test_versionCmd(t *testing.T) {
-	// cmd.VERSION = "0.0.0"
-
 	var (
 		versionCmd = createVersionCmd()
 		argsTmp    = []string{"version"}
