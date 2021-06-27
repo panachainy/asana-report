@@ -43,7 +43,7 @@ func Init(cfgFile string, config *Config, prefix string) {
 
 	err := viper.Unmarshal(&config)
 	if err != nil {
-		fmt.Printf("unable to decode into struct, %v", err)
+		fmt.Printf("unable to decode into struct, %v\n", err)
 	}
 }
 
@@ -61,7 +61,10 @@ func BindEnvs(iface interface{}, parts ...string) {
 		case reflect.Struct:
 			BindEnvs(v.Interface(), append(parts, tv)...)
 		default:
-			viper.BindEnv(strings.Join(append(parts, tv), "."))
+			err := viper.BindEnv(strings.Join(append(parts, tv), "."))
+			if err != nil {
+				fmt.Printf("can't bind config from ENV, %v\n", err)
+			}
 		}
 	}
 }
