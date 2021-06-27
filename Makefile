@@ -22,3 +22,6 @@ install:
 
 try:
 	~/bin/asana-report version
+
+test:
+	go test -cover ./...
