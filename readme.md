@@ -1,6 +1,6 @@
 # Asana report
 
-[![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=feature/prepair-config)](https://coveralls.io/github/panachainy/asana-report?branch=feature/prepair-config)
+[![Coverage Status](https://coveralls.io/repos/github/panachainy/asar/badge.svg?branch=feature/prepair-config)](https://coveralls.io/github/panachainy/asar?branch=feature/prepair-config)
 
 ## Initial
 
@@ -12,11 +12,11 @@ cobra init --pkg-name github.com/spf13/newApp
 ### Cobra add
 
 ```sh
-# ./asana-report serve
+# ./asar serve
 cobra add serve
-# ./asana-report config
+# ./asar config
 cobra add config
-# add cmd with Subcommand call with `./asana-report config create`
+# add cmd with Subcommand call with `./asar config create`
 cobra add create -p 'configCmd'
 ```
 

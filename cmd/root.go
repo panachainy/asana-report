@@ -13,7 +13,7 @@ import (
 var cfgFile string
 
 var rootCmd = &cobra.Command{
-	Use:   "asana-report",
+	Use:   "asar",
 	Short: "for generate report of asana application",
 	Long: `Can generate report of asana application with cli.
 	So you can get all task of all your project by workspace,
@@ -31,7 +31,7 @@ func Execute(version string) {
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.asana-report.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.asar.yaml)")
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
@@ -45,9 +45,9 @@ func initConfig() {
 		home, err := homedir.Dir()
 		cobra.CheckErr(err)
 
-		// Search config in home directory with name ".asana-report" (without extension).
+		// Search config in home directory with name ".asar" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigName(".asana-report")
+		viper.SetConfigName(".asar")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
