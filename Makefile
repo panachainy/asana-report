@@ -34,3 +34,9 @@ cov-htm:
 
 cov-func:
 	go tool cover -func=covprofile
+
+try-env:
+	export ASAR_PROJECT_BASE=project_base_test && export ASAR_PORT=80 && go run main.go version
+
+try-file:
+	go run main.go --config ./.env version
