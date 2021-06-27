@@ -22,3 +22,15 @@ install:
 
 try:
 	~/bin/asana-report version
+
+test:
+	go test -cover ./...
+
+test-cov:
+	go test -race -covermode=atomic -coverprofile=covprofile ./...
+
+cov-htm:
+	go tool cover -html=covprofile
+
+cov-func:
+	go tool cover -func=covprofile

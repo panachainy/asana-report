@@ -1,5 +1,7 @@
 # Asana report
 
+[![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=feature/prepair-config)](https://coveralls.io/github/panachainy/asana-report?branch=feature/prepair-config)
+
 ## Initial
 
 ```sh
@@ -48,4 +50,6 @@ make try
 
 ## REF
 
-https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/
+* https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/
+
+* https://github.com/KEINOS/Hello-Cobra
