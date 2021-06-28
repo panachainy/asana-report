@@ -24,11 +24,11 @@ func Test_versionCmd(t *testing.T) {
 		assert.FailNowf(t, "Failed to execute 'helloCmd.Execute()'.", "Error msg: %v", err)
 	}
 
-	expect = "asana-report development\n"
+	expect = "asar development\n"
 
 	actual = buffTmp.String()
 
 	assert.Equal(t, expect, actual,
-		"Command 'asana-report' should return 'asana-report development'.",
+		"Command 'asar' should return 'asar development'.",
 	)
 }

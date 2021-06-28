@@ -9,7 +9,7 @@ var versionCmd = createVersionCmd()
 func createVersionCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "version",
-		Short: "version of your asana-report cli",
+		Short: "version of your asar cli",
 		Run: func(cmd *cobra.Command, args []string) {
 			cmd.Println(rootCmd.Use + " " + VERSION)
 		},

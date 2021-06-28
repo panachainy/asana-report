@@ -1,6 +1,6 @@
 # Asana report
 
-[![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=feature/prepair-config)](https://coveralls.io/github/panachainy/asana-report?branch=feature/prepair-config)
+[![Coverage Status](https://coveralls.io/repos/github/panachainy/asar/badge.svg?branch=feature/prepair-config)](https://coveralls.io/github/panachainy/asar?branch=feature/prepair-config)
 
 ## Initial
 
@@ -12,11 +12,11 @@ cobra init --pkg-name github.com/spf13/newApp
 ### Cobra add
 
 ```sh
-# ./asana-report serve
+# ./asar serve
 cobra add serve
-# ./asana-report config
+# ./asar config
 cobra add config
-# add cmd with Subcommand call with `./asana-report config create`
+# add cmd with Subcommand call with `./asar config create`
 cobra add create -p 'configCmd'
 ```
 
@@ -48,8 +48,18 @@ Try Run
 make try
 ```
 
+### ENV
+
+Must set prefix when you set config with env.
+
+Example
+
+```env
+export ASAR_PROJECT_BASE=te222234123123
+```
+
 ## REF
 
-* https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/
-
-* https://github.com/KEINOS/Hello-Cobra
+* [Blog create golang cli](https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/)
+* [Hello-Cobra](https://github.com/KEINOS/Hello-Cobra)
+* [Issue-188](https://github.com/spf13/viper/issues/188#issuecomment-399884438)
