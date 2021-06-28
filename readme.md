@@ -1,6 +1,6 @@
 # Asana report
 
-[![Coverage Status](https://coveralls.io/repos/github/panachainy/asar/badge.svg?branch=feature/prepair-config)](https://coveralls.io/github/panachainy/asar?branch=feature/prepair-config)
+[![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=main)](https://coveralls.io/github/panachainy/asana-report?branch=main)
 
 ## Initial
 
