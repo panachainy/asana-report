@@ -16,10 +16,7 @@ var rootCmd = &cobra.Command{
 	You can get summary of task and status.`,
 }
 
-var (
-	VERSION string = "development"
-	CONFIG  util.Config
-)
+var VERSION string = "development"
 
 func Execute(version string) {
 	VERSION = version
@@ -35,5 +32,5 @@ func init() {
 }
 
 func initConfig() {
-	util.Init(cfgFile, &CONFIG, rootCmd.Use)
+	util.Init(cfgFile, rootCmd.Use)
 }

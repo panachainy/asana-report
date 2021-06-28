@@ -11,12 +11,14 @@ import (
 	"github.com/spf13/viper"
 )
 
+var CONFIG Config
+
 type Config struct {
 	ProjectBase string `mapstructure:"project_base"`
 	Port        string `mapstructure:"port"`
 }
 
-func Init(cfgFile string, config *Config, prefix string) {
+func Init(cfgFile string, prefix string) {
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
@@ -39,15 +41,16 @@ func Init(cfgFile string, config *Config, prefix string) {
 	if err := viper.ReadInConfig(); err == nil {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
-	BindEnvs(*config)
 
-	err := viper.Unmarshal(&config)
+	bindEnvs(CONFIG)
+
+	err := viper.Unmarshal(&CONFIG)
 	if err != nil {
 		fmt.Printf("unable to decode into struct, %v\n", err)
 	}
 }
 
-func BindEnvs(iface interface{}, parts ...string) {
+func bindEnvs(iface interface{}, parts ...string) {
 	ifv := reflect.ValueOf(iface)
 	ift := reflect.TypeOf(iface)
 	for i := 0; i < ift.NumField(); i++ {
@@ -59,7 +62,7 @@ func BindEnvs(iface interface{}, parts ...string) {
 		}
 		switch v.Kind() {
 		case reflect.Struct:
-			BindEnvs(v.Interface(), append(parts, tv)...)
+			bindEnvs(v.Interface(), append(parts, tv)...)
 		default:
 			err := viper.BindEnv(strings.Join(append(parts, tv), "."))
 			if err != nil {
