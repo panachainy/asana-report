@@ -1,6 +1,11 @@
 package cmd
 
 import (
+	"asana-report/model"
+	"fmt"
+	"net/http"
+
+	"github.com/go-resty/resty/v2"
 	"github.com/spf13/cobra"
 )
 
@@ -9,7 +14,42 @@ var gstCmd = &cobra.Command{
 	Short: "Get task status",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		process(cmd)
+		var response model.GstResponse
+
+		// TODO: move to config
+		workspaceId := ""
+		token := ""
+
+		workspace := getWorkspace(workspaceId, token)
+
+		for _, project := range workspace.Project {
+			cmd.Printf("Project: %v in progress...\n", project.Name)
+
+			taskCompleted := 0
+			tasks := getTasks(project.Gid, token)
+
+			for _, task := range tasks.Data {
+				if task.Completed {
+					taskCompleted++
+				}
+				// cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
+			}
+
+			gstData := model.Gst{ProjectName: project.Name, TotalCompleted: taskCompleted, TotalTask: len(tasks.Data)}
+			response.Data = append(response.Data, gstData)
+
+			cmd.Println("Done.")
+			cmd.Println("================================================")
+		}
+
+		response.SumCompleted, response.SumTask = getSumCompletedAndTask(response.Data)
+
+		cmd.Println(response)
+		cmd.Println("All Done.")
+
+		cmd.Println("==== Report ====")
+		cmd.Printf("SumTask: %v\n", response.SumTask)
+		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
 	},
 }
 
@@ -17,5 +57,57 @@ func init() {
 	rootCmd.AddCommand(gstCmd)
 }
 
-func process(cmd *cobra.Command) {
+func getTasks(projectId string, token string) model.Tasks {
+	client := resty.New()
+
+	tasks := model.Tasks{}
+
+	response, err := client.R().
+		EnableTrace().
+		SetAuthToken(token).
+		SetResult(&tasks).
+		Get("https://app.asana.com/api/1.1/projects/" + projectId + "/tasks?opt_fields=completed,name")
+	if err != nil {
+		panic(err)
+	}
+
+	if response.StatusCode() != http.StatusOK {
+		errorString := fmt.Sprintf("Something wrong from asana status code is %v at getTasks()\n", response.StatusCode())
+		panic(errorString)
+	}
+
+	return tasks
+}
+
+func getWorkspace(workspaceId string, token string) model.Workspace {
+	client := resty.New()
+
+	workspace := model.Workspace{}
+
+	response, err := client.R().
+		EnableTrace().
+		SetAuthToken(token).
+		SetResult(&workspace).
+		Get("https://app.asana.com/api/1.1/projects?limit=10&workspace=" + workspaceId)
+	if err != nil {
+		panic(err)
+	}
+
+	if response.StatusCode() != http.StatusOK {
+		errorString := fmt.Sprintf("Something wrong from asana status code is %v at getWorkspace()\n", response.StatusCode())
+		panic(errorString)
+	}
+
+	return workspace
+}
+
+func getSumCompletedAndTask(gstList []model.Gst) (int, int) {
+	sumCompleted := 0
+	sumTask := 0
+
+	for _, gst := range gstList {
+		sumCompleted = sumCompleted + gst.TotalCompleted
+		sumTask = sumTask + gst.TotalTask
+	}
+	return sumCompleted, sumTask
 }
