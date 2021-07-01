@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"asana-report/model"
+	"asana-report/util"
 	"fmt"
 	"net/http"
 
@@ -16,9 +17,13 @@ var gstCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var response model.GstResponse
 
-		// TODO: move to config
-		workspaceId := ""
-		token := ""
+		workspaceId := util.CONFIG.WorkspaceId
+		token := util.CONFIG.Token
+
+		cmd.Println("Configuration")
+		cmd.Printf("WorkspaceId: %v\n", workspaceId)
+		cmd.Printf("Token: %v\n", token)
+		cmd.Println("================================================")
 
 		workspace := getWorkspace(workspaceId, token)
 
@@ -44,12 +49,9 @@ var gstCmd = &cobra.Command{
 
 		response.SumCompleted, response.SumTask = getSumCompletedAndTask(response.Data)
 
-		cmd.Println(response)
 		cmd.Println("All Done.")
 
-		cmd.Println("==== Report ====")
-		cmd.Printf("SumTask: %v\n", response.SumTask)
-		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
+		printReport(cmd, response)
 	},
 }
 
@@ -110,4 +112,27 @@ func getSumCompletedAndTask(gstList []model.Gst) (int, int) {
 		sumTask = sumTask + gst.TotalTask
 	}
 	return sumCompleted, sumTask
+}
+
+func printReport(cmd *cobra.Command, response model.GstResponse) {
+	if true {
+
+		cmd.Println("==== Full Report ====")
+
+		for _, project := range response.Data {
+			cmd.Printf("[Project] %v\n", project.ProjectName)
+			cmd.Printf("  TotalTask: %v\n", project.TotalTask)
+			cmd.Printf("  TotalCompleted: %v\n", project.TotalCompleted)
+			cmd.Println("----------------")
+		}
+
+		cmd.Printf("SumTask: %v\n", response.SumTask)
+		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
+	} else {
+
+		cmd.Println("==== Short Report ====")
+
+		cmd.Printf("SumTask: %v\n", response.SumTask)
+		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
+	}
 }

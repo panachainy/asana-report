@@ -14,8 +14,8 @@ import (
 var CONFIG Config
 
 type Config struct {
-	ProjectBase string `mapstructure:"project_base"`
-	Port        string `mapstructure:"port"`
+	WorkspaceId string `mapstructure:"workspace_id"`
+	Token       string `mapstructure:"token"`
 }
 
 func Init(cfgFile string, prefix string) {
