@@ -6,17 +6,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var cfgFile string
+var (
+	VERSION string = "development"
+	cfgFile string
 
-var rootCmd = &cobra.Command{
-	Use:   "asar",
-	Short: "for generate report of asana application",
-	Long: `Can generate report of asana application with cli.
+	rootCmd = &cobra.Command{
+		Use:   "asar",
+		Short: "for generate report of asana application",
+		Long: `Can generate report of asana application with cli.
 	So you can get all task of all your project by workspace,
 	You can get summary of task and status.`,
-}
-
-var VERSION string = "development"
+	}
+)
 
 func Execute(version string) {
 	VERSION = version
