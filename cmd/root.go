@@ -4,7 +4,6 @@ import (
 	"asana-report/util"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var (
@@ -28,12 +27,7 @@ func Execute(version string) {
 
 func init() {
 	cobra.OnInitialize(initConfig)
-
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.asar.yaml)")
-	rootCmd.PersistentFlags().BoolP("full-report", "f", false, "add -f tag for print full report (default is short report)")
-
-	viper.BindPFlag("is_full_report", rootCmd.PersistentFlags().Lookup("full-report"))
-	viper.SetDefault("is_full_report", false)
 }
 
 func initConfig() {

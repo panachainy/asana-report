@@ -11,12 +11,11 @@ import (
 	"github.com/spf13/viper"
 )
 
-var CONFIG Config
+var GLOBAL_CONFIG GlobalConfig
 
-type Config struct {
-	WorkspaceId  string `mapstructure:"workspace_id"`
-	Token        string `mapstructure:"token"`
-	IsFullReport bool   `mapstructure:"is_full_report"`
+type GlobalConfig struct {
+	WorkspaceId string `mapstructure:"workspace_id"`
+	Token       string `mapstructure:"token"`
 }
 
 func Init(cfgFile string, prefix string) {
@@ -43,9 +42,9 @@ func Init(cfgFile string, prefix string) {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
 
-	bindEnvs(CONFIG)
+	bindEnvs(GLOBAL_CONFIG)
 
-	err := viper.Unmarshal(&CONFIG)
+	err := viper.Unmarshal(&GLOBAL_CONFIG)
 	if err != nil {
 		fmt.Printf("unable to decode into struct, %v\n", err)
 	}

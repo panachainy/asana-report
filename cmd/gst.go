@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var isFullReport bool
+
 var gstCmd = &cobra.Command{
 	Use:   "gst",
 	Short: "Get task status",
@@ -17,9 +19,8 @@ var gstCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var response model.GstResponse
 
-		workspaceId := util.CONFIG.WorkspaceId
-		token := util.CONFIG.Token
-		isFullReport := util.CONFIG.IsFullReport
+		workspaceId := util.GLOBAL_CONFIG.WorkspaceId
+		token := util.GLOBAL_CONFIG.Token
 
 		cmd.Println("[Configuration]")
 		cmd.Printf("WorkspaceId: %v\n", workspaceId)
@@ -60,6 +61,7 @@ var gstCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(gstCmd)
+	gstCmd.Flags().BoolVarP(&isFullReport, "full-report", "f", false, "add -f tag for print full report (default is short report)")
 }
 
 func getTasks(projectId string, token string) model.Tasks {
@@ -118,7 +120,7 @@ func getSumCompletedAndTask(gstList []model.Gst) (int, int) {
 }
 
 func printReport(cmd *cobra.Command, response model.GstResponse) {
-	if true {
+	if isFullReport {
 		cmd.Println("==== Full Report ====")
 
 		for _, project := range response.Data {
