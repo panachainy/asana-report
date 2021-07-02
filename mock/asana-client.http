@@ -1,0 +1,19 @@
+@token="1/xxx:xxx"
+@projectId="xxx"
+@workspace=xxx
+@owner=xxx
+@owner_name=Panachai
+# @baseUrl="https://app.asana.com/api/1.1"
+@baseUrl="http://localhost:3500"
+
+### Get detail status task *not need
+curl "{{baseUrl}}/tasks/1200515351394075?opt_fields=completed" \
+  -H "Authorization: Bearer {{token}}"
+
+### Get task in project
+curl "{{baseUrl}}/projects/{{projectId}}/tasks?opt_fields=completed,name" \
+  -H "Authorization: Bearer {{token}}"
+
+### Get all project
+curl "{{baseUrl}}/projects?limit=10&workspace={{workspace}}" \
+  -H "Authorization: Bearer {{token}}"
