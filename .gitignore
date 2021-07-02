@@ -4,3 +4,7 @@ build
 
 # coverage
 covprofile
+
+.env
+
+node_modules

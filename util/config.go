@@ -11,11 +11,14 @@ import (
 	"github.com/spf13/viper"
 )
 
-var CONFIG Config
+var GLOBAL_CONFIG = GlobalConfig{
+	AsanaUrl: "https://app.asana.com/api/1.1",
+}
 
-type Config struct {
-	ProjectBase string `mapstructure:"project_base"`
-	Port        string `mapstructure:"port"`
+type GlobalConfig struct {
+	WorkspaceId string `mapstructure:"workspace_id"`
+	Token       string `mapstructure:"token"`
+	AsanaUrl    string `mapstructure:"asana_url"`
 }
 
 func Init(cfgFile string, prefix string) {
@@ -42,9 +45,9 @@ func Init(cfgFile string, prefix string) {
 		fmt.Fprintln(os.Stderr, "Using config file:", viper.ConfigFileUsed())
 	}
 
-	bindEnvs(CONFIG)
+	bindEnvs(GLOBAL_CONFIG)
 
-	err := viper.Unmarshal(&CONFIG)
+	err := viper.Unmarshal(&GLOBAL_CONFIG)
 	if err != nil {
 		fmt.Printf("unable to decode into struct, %v\n", err)
 	}
@@ -70,4 +73,9 @@ func bindEnvs(iface interface{}, parts ...string) {
 			}
 		}
 	}
+}
+
+func PrintConfig(cmd *cobra.Command) {
+	cmd.Println("[Configuration]")
+	cmd.Printf("  GLOBAL_CONFIG: %+v\n", GLOBAL_CONFIG)
 }

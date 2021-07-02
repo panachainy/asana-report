@@ -52,10 +52,12 @@ make try
 
 Must set prefix when you set config with env.
 
-Example
+WorkspaceId
+Token
 
 ```env
-export ASAR_PROJECT_BASE=te222234123123
+export ASAR_WORKSPACE_ID=0000000000000000
+export ASAR_TOKEN="x/xxxxx:xxxxx"
 ```
 
 ## REF
@@ -63,3 +65,6 @@ export ASAR_PROJECT_BASE=te222234123123
 * [Blog create golang cli](https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/)
 * [Hello-Cobra](https://github.com/KEINOS/Hello-Cobra)
 * [Issue-188](https://github.com/spf13/viper/issues/188#issuecomment-399884438)
+* [Http to go](https://mholt.github.io/curl-to-go/)
+* [gjson](https://github.com/tidwall/gjson)
+* [go-linq](https://github.com/ahmetb/go-linq)

@@ -40,3 +40,6 @@ try-env:
 
 try-file:
 	go run main.go --config ./.env version
+
+ast:
+	go run main.go --config ./.env ast
