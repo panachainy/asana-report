@@ -98,7 +98,10 @@ func getWorkspace(workspaceId string, token string) model.Workspace {
 		EnableTrace().
 		SetAuthToken(token).
 		SetResult(&workspace).
-		Get("projects?limit=10&workspace=" + workspaceId)
+		SetQueryParams(map[string]string{
+			"workspace": workspaceId,
+		}).
+		Get("projects")
 	if err != nil {
 		panic(err)
 	}
