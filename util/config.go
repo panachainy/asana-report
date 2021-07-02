@@ -11,11 +11,14 @@ import (
 	"github.com/spf13/viper"
 )
 
-var GLOBAL_CONFIG GlobalConfig
+var GLOBAL_CONFIG = GlobalConfig{
+	AsanaUrl: "https://app.asana.com/api/1.1",
+}
 
 type GlobalConfig struct {
 	WorkspaceId string `mapstructure:"workspace_id"`
 	Token       string `mapstructure:"token"`
+	AsanaUrl    string `mapstructure:"asana_url"`
 }
 
 func Init(cfgFile string, prefix string) {
@@ -70,4 +73,9 @@ func bindEnvs(iface interface{}, parts ...string) {
 			}
 		}
 	}
+}
+
+func PrintConfig(cmd *cobra.Command) {
+	cmd.Println("[Configuration]")
+	cmd.Printf("  GLOBAL_CONFIG: %+v\n", GLOBAL_CONFIG)
 }

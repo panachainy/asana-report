@@ -21,13 +21,12 @@ var astCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var response model.AstResponse
 
+		client.SetHostURL(util.GLOBAL_CONFIG.AsanaUrl)
+
 		workspaceId := util.GLOBAL_CONFIG.WorkspaceId
 		token := util.GLOBAL_CONFIG.Token
 
-		cmd.Println("[Configuration]")
-		cmd.Printf("WorkspaceId: %v\n", workspaceId)
-		cmd.Printf("Token: %v\n", token)
-		cmd.Printf("IsFullReport: %v\n", isFullReport)
+		util.PrintConfig(cmd)
 
 		cmd.Println("================================================")
 
@@ -64,8 +63,6 @@ var astCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(astCmd)
 	astCmd.Flags().BoolVarP(&isFullReport, "full-report", "f", false, "add -f tag for print full report (default is short report)")
-
-	client.SetHostURL("https://app.asana.com/api/1.1")
 }
 
 func getTasks(projectId string, token string) model.Tasks {
