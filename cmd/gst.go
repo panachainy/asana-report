@@ -19,10 +19,13 @@ var gstCmd = &cobra.Command{
 
 		workspaceId := util.CONFIG.WorkspaceId
 		token := util.CONFIG.Token
+		isFullReport := util.CONFIG.IsFullReport
 
 		cmd.Println("Configuration")
 		cmd.Printf("WorkspaceId: %v\n", workspaceId)
 		cmd.Printf("Token: %v\n", token)
+		cmd.Printf("IsFullReport: %v\n", isFullReport)
+
 		cmd.Println("================================================")
 
 		workspace := getWorkspace(workspaceId, token)
@@ -116,7 +119,6 @@ func getSumCompletedAndTask(gstList []model.Gst) (int, int) {
 
 func printReport(cmd *cobra.Command, response model.GstResponse) {
 	if true {
-
 		cmd.Println("==== Full Report ====")
 
 		for _, project := range response.Data {
@@ -129,7 +131,6 @@ func printReport(cmd *cobra.Command, response model.GstResponse) {
 		cmd.Printf("SumTask: %v\n", response.SumTask)
 		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
 	} else {
-
 		cmd.Println("==== Short Report ====")
 
 		cmd.Printf("SumTask: %v\n", response.SumTask)

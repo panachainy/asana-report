@@ -14,8 +14,9 @@ import (
 var CONFIG Config
 
 type Config struct {
-	WorkspaceId string `mapstructure:"workspace_id"`
-	Token       string `mapstructure:"token"`
+	WorkspaceId  string `mapstructure:"workspace_id"`
+	Token        string `mapstructure:"token"`
+	IsFullReport bool   `mapstructure:"is_full_report"`
 }
 
 func Init(cfgFile string, prefix string) {
