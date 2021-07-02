@@ -42,4 +42,10 @@ try-file:
 	go run main.go --config ./.env version
 
 ast:
+	go run main.go ast
+
+ast-c:
 	go run main.go --config ./.env ast
+
+apib:
+	yarn --cwd ./mock mock
