@@ -41,5 +41,5 @@ try-env:
 try-file:
 	go run main.go --config ./.env version
 
-gst:
-	go run main.go --config ./.env gst
+ast:
+	go run main.go --config ./.env ast

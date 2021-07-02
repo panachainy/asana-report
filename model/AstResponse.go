@@ -1,12 +1,12 @@
 package model
 
-type GstResponse struct {
-	Data         []Gst `json:"data"`
+type AstResponse struct {
+	Data         []Ast `json:"data"`
 	SumCompleted int
 	SumTask      int
 }
 
-type Gst struct {
+type Ast struct {
 	ProjectName    string
 	TotalCompleted int
 	TotalTask      int

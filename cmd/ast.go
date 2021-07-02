@@ -12,12 +12,12 @@ import (
 
 var isFullReport bool
 
-var gstCmd = &cobra.Command{
-	Use:   "gst",
+var astCmd = &cobra.Command{
+	Use:   "ast",
 	Short: "Get task status",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		var response model.GstResponse
+		var response model.AstResponse
 
 		workspaceId := util.GLOBAL_CONFIG.WorkspaceId
 		token := util.GLOBAL_CONFIG.Token
@@ -44,8 +44,8 @@ var gstCmd = &cobra.Command{
 				// cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
 			}
 
-			gstData := model.Gst{ProjectName: project.Name, TotalCompleted: taskCompleted, TotalTask: len(tasks.Data)}
-			response.Data = append(response.Data, gstData)
+			astData := model.Ast{ProjectName: project.Name, TotalCompleted: taskCompleted, TotalTask: len(tasks.Data)}
+			response.Data = append(response.Data, astData)
 
 			cmd.Println("Done.")
 			cmd.Println("================================================")
@@ -60,8 +60,8 @@ var gstCmd = &cobra.Command{
 }
 
 func init() {
-	rootCmd.AddCommand(gstCmd)
-	gstCmd.Flags().BoolVarP(&isFullReport, "full-report", "f", false, "add -f tag for print full report (default is short report)")
+	rootCmd.AddCommand(astCmd)
+	astCmd.Flags().BoolVarP(&isFullReport, "full-report", "f", false, "add -f tag for print full report (default is short report)")
 }
 
 func getTasks(projectId string, token string) model.Tasks {
@@ -108,18 +108,18 @@ func getWorkspace(workspaceId string, token string) model.Workspace {
 	return workspace
 }
 
-func getSumCompletedAndTask(gstList []model.Gst) (int, int) {
+func getSumCompletedAndTask(astList []model.Ast) (int, int) {
 	sumCompleted := 0
 	sumTask := 0
 
-	for _, gst := range gstList {
-		sumCompleted = sumCompleted + gst.TotalCompleted
-		sumTask = sumTask + gst.TotalTask
+	for _, ast := range astList {
+		sumCompleted = sumCompleted + ast.TotalCompleted
+		sumTask = sumTask + ast.TotalTask
 	}
 	return sumCompleted, sumTask
 }
 
-func printReport(cmd *cobra.Command, response model.GstResponse) {
+func printReport(cmd *cobra.Command, response model.AstResponse) {
 	if isFullReport {
 		cmd.Println("==== Full Report ====")
 
