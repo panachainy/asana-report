@@ -30,7 +30,7 @@ func init() {
 	cobra.OnInitialize(initConfig)
 
 	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.asar.yaml)")
-	rootCmd.PersistentFlags().BoolP("full-report", "f", true, "add -f tag for print full report (default is short report)")
+	rootCmd.PersistentFlags().BoolP("full-report", "f", false, "add -f tag for print full report (default is short report)")
 
 	viper.BindPFlag("is_full_report", rootCmd.PersistentFlags().Lookup("full-report"))
 	viper.SetDefault("is_full_report", false)
