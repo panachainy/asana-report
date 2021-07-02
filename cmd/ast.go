@@ -10,6 +10,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var client = resty.New()
+
 var isFullReport bool
 
 var astCmd = &cobra.Command{
@@ -62,18 +64,24 @@ var astCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(astCmd)
 	astCmd.Flags().BoolVarP(&isFullReport, "full-report", "f", false, "add -f tag for print full report (default is short report)")
+
+	client.SetHostURL("https://app.asana.com/api/1.1")
 }
 
 func getTasks(projectId string, token string) model.Tasks {
-	client := resty.New()
-
 	tasks := model.Tasks{}
 
 	response, err := client.R().
 		EnableTrace().
 		SetAuthToken(token).
 		SetResult(&tasks).
-		Get("https://app.asana.com/api/1.1/projects/" + projectId + "/tasks?opt_fields=completed,name")
+		SetPathParams(map[string]string{
+			"project_id": projectId,
+		}).
+		SetQueryParams(map[string]string{
+			"opt_fields": "completed,name",
+		}).
+		Get("projects/{project_id}/tasks")
 	if err != nil {
 		panic(err)
 	}
@@ -87,15 +95,13 @@ func getTasks(projectId string, token string) model.Tasks {
 }
 
 func getWorkspace(workspaceId string, token string) model.Workspace {
-	client := resty.New()
-
 	workspace := model.Workspace{}
 
 	response, err := client.R().
 		EnableTrace().
 		SetAuthToken(token).
 		SetResult(&workspace).
-		Get("https://app.asana.com/api/1.1/projects?limit=10&workspace=" + workspaceId)
+		Get("projects?limit=10&workspace=" + workspaceId)
 	if err != nil {
 		panic(err)
 	}
