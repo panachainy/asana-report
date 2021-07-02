@@ -21,7 +21,7 @@ var gstCmd = &cobra.Command{
 		token := util.CONFIG.Token
 		isFullReport := util.CONFIG.IsFullReport
 
-		cmd.Println("Configuration")
+		cmd.Println("[Configuration]")
 		cmd.Printf("WorkspaceId: %v\n", workspaceId)
 		cmd.Printf("Token: %v\n", token)
 		cmd.Printf("IsFullReport: %v\n", isFullReport)
