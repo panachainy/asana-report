@@ -1,0 +1,224 @@
+FORMAT: 1A
+HOST:  https://app.asana.com/api/1.1
+
+# ASANA
+
+## Project [/projects?limit=10&workspace=1127028194303123]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200195508767749",
+                        "name": "Learning",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200520558756397",
+                        "name": "Golang-cobra",
+                        "resource_type": "project"
+                    }
+                ],
+                "next_page": null
+            }
+
+## Project [/projects/1200195508767749/tasks?opt_fields=completed,name]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200515351394075",
+                        "completed": true,
+                        "name": "Get report on Asana"
+                    },
+                    {
+                        "gid": "1200520558635379",
+                        "completed": false,
+                        "name": "Try on mondey.com for report and other"
+                    },
+                    {
+                        "gid": "1200520558635386",
+                        "completed": false,
+                        "name": "Try to get CSV from Asana and transform to readable report"
+                    },
+                    {
+                        "gid": "1200520558635395",
+                        "completed": false,
+                        "name": "unit test oreilly"
+                    },
+                    {
+                        "gid": "1200520558821231",
+                        "completed": false,
+                        "name": "web chat https://www.drift.com/"
+                    },
+                    {
+                        "gid": "1200520558821272",
+                        "completed": false,
+                        "name": "landscape stack https://landscape.cncf.io/"
+                    },
+                    {
+                        "gid": "1200527959150561",
+                        "completed": false,
+                        "name": "Zipkin https://medium.com/linedevth/zipkin-%E0%B8%84%E0%B8%B7%E0%B8%AD%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3-%E0%B9%81%E0%B8%A5%E0%B9%89%E0%B8%A7%E0%B8%97%E0%B8%B5%E0%B9%88-line-corporation-%E0%B9%81%E0%B8%A5%E0%B8%B0-line-fukuoka-%E0%B9%80%E0%B8%82%E0%B8%B2%E0%B9%83%E0%B8%8A%E0%B9%89-zipkin-%E0%B8%A1%E0%B8%B2%E0%B8%97%E0%B8%B3%E0%B8%AD%E0%B8%B0%E0%B9%84%E0%B8%A3-3150964668fe"
+                    },
+                    {
+                        "gid": "1200527959150567",
+                        "completed": false,
+                        "name": "jenkins 101 https://www.youtube.com/watch?v=7KCS70sCoK0&ab_channel=TechWorldwithNana"
+                    },
+                    {
+                        "gid": "1200527959150570",
+                        "completed": false,
+                        "name": "bit for micro frontend https://faun.pub/how-to-scale-microfrontend-teams-with-bit-2a852a27a5bf"
+                    },
+                    {
+                        "gid": "1200317604812944",
+                        "completed": false,
+                        "name": "Clound native"
+                    },
+                    {
+                        "gid": "1200195560177000",
+                        "completed": false,
+                        "name": "workflow https://zapier.com/app/onboarding/profile"
+                    },
+                    {
+                        "gid": "1200368204973951",
+                        "completed": true,
+                        "name": "Makefile"
+                    },
+                    {
+                        "gid": "1200195559276078",
+                        "completed": true,
+                        "name": "Research Workflow"
+                    },
+                    {
+                        "gid": "1200414221154640",
+                        "completed": true,
+                        "name": "update env-config (ไม่ชัวว่า repo นี้หรือเปล่า) https://github.com/panachainy/env-config"
+                    },
+                    {
+                        "gid": "1200420490353652",
+                        "completed": false,
+                        "name": "อ่านด้วย https://dev.to/rdamrong/docker-scan-2-4dii?fbclid=IwAR2OEzNnIloADqCiwkhJkVpEPu1Wz1fMudgP8JslamlPk3SORxngi0WsrJ"
+                    },
+                    {
+                        "gid": "1200436097800654",
+                        "completed": false,
+                        "name": "ETL"
+                    },
+                    {
+                        "gid": "1200486577426757",
+                        "completed": false,
+                        "name": "Alternative Realtime database (firebase) https://app.supabase.io/"
+                    },
+                    {
+                        "gid": "1200195560176997",
+                        "completed": false,
+                        "name": "sonoff ifttt"
+                    },
+                    {
+                        "gid": "1200195559276071",
+                        "completed": false,
+                        "name": "2 transform Finnomena data to read able data."
+                    },
+                    {
+                        "gid": "1200195559276072",
+                        "completed": false,
+                        "name": "3 Add formula to compute readable data to analyted data"
+                    },
+                    {
+                        "gid": "1200210502054509",
+                        "completed": true,
+                        "name": "1 write program for feed data from finomena"
+                    },
+                    {
+                        "gid": "1200195432315280",
+                        "completed": false,
+                        "name": "dns server on radpberry pi"
+                    },
+                    {
+                        "gid": "1200195432315285",
+                        "completed": true,
+                        "name": "update github profile with new contents"
+                    },
+                    {
+                        "gid": "1200195432315262",
+                        "completed": false,
+                        "name": "update recommend program"
+                    },
+                    {
+                        "gid": "1200232649019476",
+                        "completed": false,
+                        "name": "openpolicyagent.org"
+                    },
+                    {
+                        "gid": "1200451782463766",
+                        "completed": false,
+                        "name": "https://getappbox.com/ ios store"
+                    },
+                    {
+                        "gid": "1200451782463759",
+                        "completed": false,
+                        "name": "make CI CD Nestjs"
+                    }
+                ]
+            }
+
+## Project [/projects/1200520558756397/tasks?opt_fields=completed,name]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200328400401279",
+                        "completed": true,
+                        "name": "https://github.com/spf13/cobra"
+                    },
+                    {
+                        "gid": "1200328400401281",
+                        "completed": true,
+                        "name": "https://github.com/spf13/viper"
+                    },
+                    {
+                        "gid": "1200520558821212",
+                        "completed": true,
+                        "name": "goxc"
+                    },
+                    {
+                        "gid": "1200520558821219",
+                        "completed": true,
+                        "name": "cli version"
+                    },
+                    {
+                        "gid": "1200520558821226",
+                        "completed": false,
+                        "name": "upload to homebrew"
+                    },
+                    {
+                        "gid": "1200520558821243",
+                        "completed": true,
+                        "name": "try cobra test"
+                    },
+                    {
+                        "gid": "1200520558821267",
+                        "completed": true,
+                        "name": "prepair config"
+                    }
+                ]
+            }

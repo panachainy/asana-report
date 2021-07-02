@@ -1,0 +1,11 @@
+{
+  "name": "mock",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "drakov": "^1.0.4"
+  },
+  "scripts": {
+    "mock": "drakov -f './**/*.apib' -p 3500"
+  }
+}
