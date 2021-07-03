@@ -26,7 +26,7 @@ func GetTasks(projectId string, token string) model.Tasks {
 			"project_id": projectId,
 		}).
 		SetQueryParams(map[string]string{
-			"opt_fields": "completed,name",
+			"opt_fields": "completed,name,assignee",
 		}).
 		Get("projects/{project_id}/tasks")
 	if err != nil {
