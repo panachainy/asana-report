@@ -81,13 +81,9 @@ func printReport(cmd *cobra.Command, response model.AstResponse) {
 			cmd.Printf("  TotalCompleted: %v\n", project.TotalCompleted)
 			cmd.Println("----------------")
 		}
-
-		cmd.Printf("SumTask: %v\n", response.SumTask)
-		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
 	} else {
 		cmd.Println("==== Short Report ====")
-
-		cmd.Printf("SumTask: %v\n", response.SumTask)
-		cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
 	}
+	cmd.Printf("SumTask: %v\n", response.SumTask)
+	cmd.Printf("SumCompleted: %v\n", response.SumCompleted)
 }
