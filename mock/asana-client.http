@@ -6,6 +6,7 @@
 # @baseUrl="https://app.asana.com/api/1.1"
 @baseUrl="http://localhost:3500"
 @task_gid=
+@assigneeId=
 
 ### Get detail status task *not need
 curl "{{baseUrl}}/tasks/{{task_gid}}?opt_fields=completed,assignee" \
