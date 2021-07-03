@@ -5,6 +5,7 @@
 @owner_name=Panachai
 # @baseUrl="https://app.asana.com/api/1.1"
 @baseUrl="http://localhost:3500"
+@task_gid=
 
 ### Get detail status task *not need
 curl "{{baseUrl}}/tasks/1200515351394075?opt_fields=completed" \
@@ -17,3 +18,10 @@ curl "{{baseUrl}}/projects/{{projectId}}/tasks?opt_fields=completed,name" \
 ### Get all project
 curl "{{baseUrl}}/projects?limit=10&workspace={{workspace}}" \
   -H "Authorization: Bearer {{token}}"
+
+### PUT Task
+curl -X PUT {{baseUrl}}/tasks/{{task_gid}} \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: Bearer {{token}}' \
+  -d '{"data": {"field":"value","field":"value"} }'
