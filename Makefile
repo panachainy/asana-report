@@ -49,3 +49,6 @@ ast-c:
 
 apib:
 	yarn --cwd ./mock mock
+
+asaa:
+	go run main.go asaa
