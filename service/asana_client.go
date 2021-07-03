@@ -63,3 +63,25 @@ func GetWorkspace(workspaceId string, token string) model.Workspace {
 
 	return workspace
 }
+
+func UpdateTasks(taskId string, assigneeId string, token string) {
+	var asaaRequest model.AsaaRequest
+	asaaRequest.Data.Assignee = assigneeId
+
+	response, err := client.R().
+		EnableTrace().
+		SetAuthToken(token).
+		SetPathParam("task_gid", taskId).
+		SetBody(
+			asaaRequest,
+		).
+		Put("tasks/{task_gid}")
+	if err != nil {
+		panic(err)
+	}
+
+	if response.StatusCode() != http.StatusOK {
+		errorString := fmt.Sprintf("Something wrong from asana status code is %v at UpdateTasks()\n", response.StatusCode())
+		panic(errorString)
+	}
+}
