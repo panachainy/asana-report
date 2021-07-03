@@ -33,7 +33,7 @@ var asaaCmd = &cobra.Command{
 			tasks := service.GetTasks(project.Gid, token)
 
 			for _, task := range tasks.Data {
-				if task.Assignee != nil {
+				if task.Assignee == nil {
 					service.UpdateTasks(task.Gid, assigneeId, token)
 					taskCompleted++
 				}
