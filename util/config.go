@@ -19,6 +19,7 @@ type GlobalConfig struct {
 	WorkspaceId string `mapstructure:"workspace_id"`
 	Token       string `mapstructure:"token"`
 	AsanaUrl    string `mapstructure:"asana_url"`
+	AssigneeId  string `mapstructure:"assignee_id"`
 }
 
 func Init(cfgFile string, prefix string) {

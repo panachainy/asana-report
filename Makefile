@@ -1,4 +1,4 @@
-VERSION=0.0.1
+VERSION=0.0.2
 PATH_BUILD=build/
 FILE_COMMAND=asar
 FILE_ARCH=darwin_amd64
@@ -49,3 +49,6 @@ ast-c:
 
 apib:
 	yarn --cwd ./mock mock
+
+asaa:
+	go run main.go asaa
