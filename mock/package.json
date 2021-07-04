@@ -6,6 +6,6 @@
     "drakov": "^1.0.4"
   },
   "scripts": {
-    "mock": "drakov -f './**/*.apib' -p 3500 --watch"
+    "mock": "drakov -f './**/*.apib' -p 3500 --watch --debugMode"
   }
 }
