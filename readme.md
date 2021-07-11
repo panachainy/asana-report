@@ -2,22 +2,43 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=main)](https://coveralls.io/github/panachainy/asana-report?branch=main)
 
-## Initial
+ASAR make for easy to get progress of all your project under workspace, In my use case I need to track all task each project in one command.
+
+## Usage [Mac]
+
+Build `make build`
+Install `make install`
+Test `make try`
+
+### Set alias
+
+Run this command for set alias to your command
 
 ```sh
-mkdir -p newApp && cd newApp
-cobra init --pkg-name github.com/spf13/newApp
+echo "alias asar='/Users/panachainy/bin/asar'" >> ~/.bash_profile
 ```
 
-### Cobra add
+> you can change `~/.bash_profile` follow your command.
+
+Restart your command.
+
+Try `asar`
+
+### Setup ENV
+
+| ENV key           | Description                                    | Example                    | Remark                                                                                       |
+| ----------------- | ---------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------- |
+| ASAR_WORKSPACE_ID | Asana workspace id for scope your task         | 0000000000000000           | [API check workspaceId from your account](https://app.asana.com/api/1.0/workspaces)          |
+| ASAR_TOKEN        | Asana token for access your task               | "0/0000000000000000:xxxxx" | [Create your personal token](https://app.asana.com/0/developer-console)                      |
+| ASAR_ASSIGNEE_ID  | AssigneeId for assign all your task to that ID | 0000000000000000           | You can get from ASAR_TOKEN in `"0/0000000000000000:xxxxx"` at `0000000000000000` is your id |
+
+Must set prefix when you set config with env.
 
 ```sh
-# ./asar serve
-cobra add serve
-# ./asar config
-cobra add config
-# add cmd with Subcommand call with `./asar config create`
-cobra add create -p 'configCmd'
+export ASAR_WORKSPACE_ID=0000000000000000
+export ASAR_TOKEN="0/0000000000000000:xxxxx"
+# For feature asaa
+export ASAR_ASSIGNEE_ID="0000000000000000"
 ```
 
 ## Getting stared
@@ -48,23 +69,21 @@ Try Run
 make try
 ```
 
-### ENV
+## To do
 
-Must set prefix when you set config with env.
-
-WorkspaceId
-Token
-
-```env
-export ASAR_WORKSPACE_ID=0000000000000000
-export ASAR_TOKEN="x/xxxxx:xxxxx"
-```
+- Brew install
 
 ## REF
 
-* [Blog create golang cli](https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/)
-* [Hello-Cobra](https://github.com/KEINOS/Hello-Cobra)
-* [Issue-188](https://github.com/spf13/viper/issues/188#issuecomment-399884438)
-* [Http to go](https://mholt.github.io/curl-to-go/)
-* [gjson](https://github.com/tidwall/gjson)
-* [go-linq](https://github.com/ahmetb/go-linq)
+### Internal
+
+- [Setup project](docs/setup-project.md)
+
+### External
+
+- [Blog create golang cli](https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/)
+- [Hello-Cobra](https://github.com/KEINOS/Hello-Cobra)
+- [Issue-188](https://github.com/spf13/viper/issues/188#issuecomment-399884438)
+- [Http to go](https://mholt.github.io/curl-to-go/)
+- [gjson](https://github.com/tidwall/gjson)
+- [go-linq](https://github.com/ahmetb/go-linq)
