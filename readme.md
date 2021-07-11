@@ -4,6 +4,10 @@
 
 ASAR make for easy to get progress of all your task in each project under workspace, In my use case I need to track all task each project in one command.
 
+## Prerequisites
+
+- Golang
+
 ## Usage [Mac]
 
 1. Clone this repository
