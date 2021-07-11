@@ -6,23 +6,39 @@ ASAR make for easy to get progress of all your task in each project under worksp
 
 ## Usage [Mac]
 
-Build `make build`
-Install `make install`
-Test `make try`
+1. Clone this repository
+
+2. Build
+
+    ```sh
+    make build
+    ```
+
+3. Install
+
+    ```sh
+    make install
+    ```
+
+4. Test
+
+    ```sh
+    make try
+    ```
 
 ### Set alias
 
-Run this command for set alias to your command
+1. Run this command for set alias to your command
 
-```sh
-echo "alias asar='/Users/panachainy/bin/asar'" >> ~/.bash_profile
-```
+    ```sh
+    echo "alias asar='/Users/panachainy/bin/asar'" >> ~/.bash_profile
+    ```
 
-> you can change `~/.bash_profile` follow your command.
+    > you can change `~/.bash_profile` follow your command.
 
-Restart your command.
+2. Restart your command.
 
-Try `asar`
+3. Try `asar`
 
 ### Command
 
@@ -31,7 +47,9 @@ Try `asar`
 | asar ast  | Get task status                                   |
 | asar asaa | Assign all task in assignee with your assigneeId. |
 
-### Setup ENV
+### ENV
+
+Must set prefix when you set config with env.
 
 | ENV key           | Description                                    | Example                    | Remark                                                                                       |
 | ----------------- | ---------------------------------------------- | -------------------------- | -------------------------------------------------------------------------------------------- |
@@ -39,7 +57,7 @@ Try `asar`
 | ASAR_TOKEN        | Asana token for access your task               | "0/0000000000000000:xxxxx" | [Create your personal token](https://app.asana.com/0/developer-console)                      |
 | ASAR_ASSIGNEE_ID  | AssigneeId for assign all your task to that ID | 0000000000000000           | You can get from ASAR_TOKEN in `"0/0000000000000000:xxxxx"` at `0000000000000000` is your id |
 
-Must set prefix when you set config with env.
+#### Example
 
 ```sh
 export ASAR_WORKSPACE_ID=0000000000000000
