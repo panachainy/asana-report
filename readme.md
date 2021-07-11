@@ -24,6 +24,13 @@ Restart your command.
 
 Try `asar`
 
+### Command
+
+| Command   | Description                                       |
+| --------- | ------------------------------------------------- |
+| asar ast  | Get task status                                   |
+| asar asaa | Assign all task in assignee with your assigneeId. |
+
 ### Setup ENV
 
 | ENV key           | Description                                    | Example                    | Remark                                                                                       |
