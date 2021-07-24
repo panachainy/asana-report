@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// TODO: combine business to one with ast (ast is main)
+
 var isFullReportASAA bool
 
 var asaaCmd = &cobra.Command{
@@ -61,7 +63,7 @@ var asaaCmd = &cobra.Command{
 			cmd.Println("================================================")
 		}
 
-		response.SumCompleted, response.SumTask = getSumCompletedAndTask(response.Data)
+		response.SumCompleted, response.SumTask, response.SumSubTask, response.SumSubTaskCompleted = getSumCompletedAndTask(response.Data)
 
 		cmd.Println("All Done.")
 
