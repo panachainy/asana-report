@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var isFullReport bool
+var isFullReportAST bool
 
 var astCmd = &cobra.Command{
 	Use:   "ast",
@@ -39,7 +39,7 @@ var astCmd = &cobra.Command{
 					taskCompleted++
 				}
 
-				if isFullReport {
+				if isFullReportAST {
 					cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
 				}
 
@@ -73,7 +73,7 @@ var astCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(astCmd)
-	astCmd.Flags().BoolVarP(&isFullReport, "full-report", "f", false, "add -f tag for print full report (default is short report)")
+	astCmd.Flags().BoolVarP(&isFullReportAST, "full-report", "f", false, "add -f tag for print full report (default is short report)")
 }
 
 func getSumCompletedAndTask(astList []model.Ast) (int, int) {
@@ -89,7 +89,7 @@ func getSumCompletedAndTask(astList []model.Ast) (int, int) {
 }
 
 func printReport(cmd *cobra.Command, response model.AstResponse) {
-	if isFullReport {
+	if isFullReportAST {
 		cmd.Println("==== Full Report ====")
 
 		for _, project := range response.Data {

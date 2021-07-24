@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var isFullReportASAA bool
+
 var asaaCmd = &cobra.Command{
 	Use:   "asaa",
 	Short: "Assign all task in assignee with your assigneeId.",
@@ -63,7 +65,7 @@ var asaaCmd = &cobra.Command{
 
 		cmd.Println("All Done.")
 
-		if isFullReport {
+		if isFullReportASAA {
 			cmd.Println("==== Full Report ====")
 
 			for _, project := range response.Data {
@@ -83,4 +85,5 @@ var asaaCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(asaaCmd)
+	asaaCmd.Flags().BoolVarP(&isFullReportASAA, "full-report", "f", false, "add -f tag for print full report (default is short report)")
 }
