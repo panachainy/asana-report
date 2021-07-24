@@ -8,6 +8,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// TODO: combine business to one with ast (ast is main)
+
+var isFullReportASAA bool
+
 var asaaCmd = &cobra.Command{
 	Use:   "asaa",
 	Short: "Assign all task in assignee with your assigneeId.",
@@ -33,9 +37,22 @@ var asaaCmd = &cobra.Command{
 			tasks := service.GetTasks(project.Gid, token)
 
 			for _, task := range tasks.Data {
+
 				if task.Assignee == nil {
 					service.UpdateTasks(task.Gid, assigneeId, token)
 					taskCompleted++
+				}
+
+				if task.NumSubTask != 0 {
+					subTasks := service.GetSubTasks(task.Gid, token)
+
+					// TODO: split sub-task and task
+					for _, subTask := range subTasks.Data {
+						if subTask.Assignee == nil {
+							service.UpdateTasks(subTask.Gid, assigneeId, token)
+							taskCompleted++
+						}
+					}
 				}
 			}
 
@@ -46,11 +63,11 @@ var asaaCmd = &cobra.Command{
 			cmd.Println("================================================")
 		}
 
-		response.SumCompleted, response.SumTask = getSumCompletedAndTask(response.Data)
+		response.SumCompleted, response.SumTask, response.SumSubTask, response.SumSubTaskCompleted = getSumCompletedAndTask(response.Data)
 
 		cmd.Println("All Done.")
 
-		if isFullReport {
+		if isFullReportASAA {
 			cmd.Println("==== Full Report ====")
 
 			for _, project := range response.Data {
@@ -70,4 +87,5 @@ var asaaCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(asaaCmd)
+	asaaCmd.Flags().BoolVarP(&isFullReportASAA, "full-report", "f", false, "add -f tag for print full report (default is short report)")
 }

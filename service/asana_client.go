@@ -26,7 +26,7 @@ func GetTasks(projectId string, token string) model.Tasks {
 			"project_id": projectId,
 		}).
 		SetQueryParams(map[string]string{
-			"opt_fields": "completed,name,assignee",
+			"opt_fields": "completed,name,assignee,num_subtasks",
 		}).
 		Get("projects/{project_id}/tasks")
 	if err != nil {
@@ -35,6 +35,32 @@ func GetTasks(projectId string, token string) model.Tasks {
 
 	if response.StatusCode() != http.StatusOK {
 		errorString := fmt.Sprintf("Something wrong from asana status code is %v at getTasks()\n", response.StatusCode())
+		panic(errorString)
+	}
+
+	return tasks
+}
+
+func GetSubTasks(taskId string, token string) model.Tasks {
+	tasks := model.Tasks{}
+
+	response, err := client.R().
+		EnableTrace().
+		SetAuthToken(token).
+		SetResult(&tasks).
+		SetPathParams(map[string]string{
+			"task_gid": taskId,
+		}).
+		SetQueryParams(map[string]string{
+			"opt_fields": "completed,name,assignee",
+		}).
+		Get("tasks/{task_gid}/subtasks")
+	if err != nil {
+		panic(err)
+	}
+
+	if response.StatusCode() != http.StatusOK {
+		errorString := fmt.Sprintf("Something wrong from asana status code is %v at GetSubTasks()\n", response.StatusCode())
 		panic(errorString)
 	}
 
