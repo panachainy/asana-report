@@ -34,10 +34,25 @@ var astCmd = &cobra.Command{
 			tasks := service.GetTasks(project.Gid, token)
 
 			for _, task := range tasks.Data {
+
 				if task.Completed {
 					taskCompleted++
 				}
-				// cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
+
+				if isFullReport {
+					cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
+				}
+
+				if task.SumSubTask != 0 {
+					subTasks := service.GetSubTasks(task.Gid, token)
+
+					// TODO: split sub-task and task
+					for _, subTask := range subTasks.Data {
+						if subTask.Completed {
+							taskCompleted++
+						}
+					}
+				}
 			}
 
 			astData := model.Ast{ProjectName: project.Name, TotalCompleted: taskCompleted, TotalTask: len(tasks.Data)}
@@ -45,6 +60,7 @@ var astCmd = &cobra.Command{
 
 			cmd.Println("Done.")
 			cmd.Println("================================================")
+
 		}
 
 		response.SumCompleted, response.SumTask = getSumCompletedAndTask(response.Data)
@@ -67,6 +83,7 @@ func getSumCompletedAndTask(astList []model.Ast) (int, int) {
 	for _, ast := range astList {
 		sumCompleted = sumCompleted + ast.TotalCompleted
 		sumTask = sumTask + ast.TotalTask
+		// TODO: add sub-task
 	}
 	return sumCompleted, sumTask
 }
