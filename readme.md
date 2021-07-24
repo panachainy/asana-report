@@ -104,10 +104,6 @@ make try
 
 ## REF
 
-### Internal
-
-- [Setup project](docs/setup-project.md)
-
 ### External
 
 - [Blog create golang cli](https://sbstjn.com/blog/create-golang-cli-application-with-cobra-and-goxc/)
