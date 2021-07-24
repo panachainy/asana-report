@@ -13,7 +13,7 @@ curl "{{baseUrl}}/tasks/{{task_gid}}?opt_fields=completed,assignee" \
   -H "Authorization: Bearer {{token}}"
 
 ### Get task in project
-curl "{{baseUrl}}/projects/{{projectId}}/tasks?opt_fields=completed,name,assignee" \
+curl "{{baseUrl}}/projects/{{projectId}}/tasks?opt_fields=completed,name,assignee,num_subtasks" \
   -H "Authorization: Bearer {{token}}"
 
 ### Get all project
@@ -21,7 +21,7 @@ curl "{{baseUrl}}/projects?limit=100&workspace={{workspace}}" \
   -H "Authorization: Bearer {{token}}"
 
 ### GET subtasks
-curl "{{baseUrl}}/tasks/{{task_gid}}/subtasks" \
+curl "{{baseUrl}}/tasks/{{task_gid}}/subtasks?opt_fields=completed,name,assignee" \
   -H "Authorization: Bearer {{token}}"
 
 ### PUT Task
