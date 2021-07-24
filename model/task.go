@@ -10,7 +10,7 @@ type DataTask struct {
 	ResourceType string    `json:"resource_type"`
 	Completed    bool      `json:"completed"`
 	Assignee     *Assignee `json:"assignee"`
-	SumSubTask   int       `json:"num_subtasks"`
+	NumSubTask   int       `json:"num_subtasks"`
 }
 
 type Assignee struct {

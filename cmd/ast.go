@@ -45,7 +45,7 @@ var astCmd = &cobra.Command{
 					cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
 				}
 
-				if task.SumSubTask != 0 {
+				if task.NumSubTask != 0 {
 					subTasks := service.GetSubTasks(task.Gid, token)
 
 					for _, subTask := range subTasks.Data {

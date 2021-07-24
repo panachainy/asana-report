@@ -43,7 +43,7 @@ var asaaCmd = &cobra.Command{
 					taskCompleted++
 				}
 
-				if task.SumSubTask != 0 {
+				if task.NumSubTask != 0 {
 					subTasks := service.GetSubTasks(task.Gid, token)
 
 					// TODO: split sub-task and task
