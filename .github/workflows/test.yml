@@ -24,7 +24,7 @@ jobs:
           yarn mock &
 
       - name: Run Test
-        run: make test-cov
+        run: go test -race -covermode=atomic -coverprofile=covprofile ./...
 
       - name: Send coverage
         uses: shogo82148/actions-goveralls@v1
