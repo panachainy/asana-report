@@ -57,11 +57,6 @@ func Test_GetTasks(t *testing.T) {
 			tc.mockFunc()
 			tasksResult := GetTasks(tc.projectId, tc.token)
 
-			// errExist := err != nil
-			// if tc.expectingErr != errExist {
-			// 	tt.Errorf("Error expectation not met, want %v, got %v", tc.expectingErr, errExist)
-			// }
-
 			if !reflect.DeepEqual(tc.expected, tasksResult) {
 				tt.Errorf("Error, tasks expectation not met, want %+v, got %+v", tc.expected, tasksResult)
 			}
