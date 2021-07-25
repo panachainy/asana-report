@@ -18,7 +18,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run APIB in background
-        run: make apib
+        run: |
+          yarn
+          make apib
 
       - name: Run Test
         run: make test-cov
