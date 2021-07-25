@@ -17,6 +17,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Use gha-yarn-cache
+        uses: c-hive/gha-yarn-cache@v2
+
       - name: Run APIB in background
         working-directory: mock
         run: |
