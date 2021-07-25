@@ -18,7 +18,7 @@ func Test_GetTasks(t *testing.T) {
 		expectingErr bool
 	}{
 		{
-			name:      "All success no error",
+			name:      "Success",
 			projectId: "111",
 			token:     "s",
 			mockFunc: func() {
@@ -76,7 +76,7 @@ func Test_GetSubTasks(t *testing.T) {
 		expectingErr bool
 	}{
 		{
-			name:      "All success no error",
+			name:      "Success",
 			projectId: "111",
 			token:     "",
 			mockFunc: func() {
@@ -132,7 +132,7 @@ func Test_GetWorkspace(t *testing.T) {
 		expectingErr bool
 	}{
 		{
-			name:        "All success no error",
+			name:        "Success",
 			workspaceId: "111",
 			token:       "",
 			mockFunc: func() {
