@@ -11,8 +11,14 @@ import (
 
 var client = resty.New()
 
-func InitService() {
-	client.SetHostURL(util.GLOBAL_CONFIG.AsanaUrl)
+func InitService(asanaUrl ...string) {
+	url := util.GLOBAL_CONFIG.AsanaUrl
+
+	if len(asanaUrl) > 0 {
+		url = asanaUrl[0]
+	}
+
+	client.SetHostURL(url)
 }
 
 func GetTasks(projectId string, token string) model.Tasks {
