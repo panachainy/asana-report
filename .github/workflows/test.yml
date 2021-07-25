@@ -17,8 +17,20 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Use gha-yarn-cache
-        uses: c-hive/gha-yarn-cache@v2
+      # TODO: wait library release in next week https://github.com/c-hive/gha-yarn-cache/pull/15
+      # - name: Use gha-yarn-cache
+      #   uses: c-hive/gha-yarn-cache@v2
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       - name: Run APIB in background
         working-directory: mock
