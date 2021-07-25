@@ -26,7 +26,10 @@ try:
 test:
 	go test -cover ./...
 
-test-cov: test cov-func
+test-cov:
+	go test -race -covermode=atomic -coverprofile=covprofile ./...
+
+test-ci: test-cov cov-func
 
 cov-htm:
 	go tool cover -html=covprofile
