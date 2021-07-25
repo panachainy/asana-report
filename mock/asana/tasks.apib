@@ -86,3 +86,33 @@ HOST:  https://app.asana.com/api/1.1
             }
         }
 
+## Sub-Task [/tasks/111/subtasks?opt_fields=completed,name,assignee]
+
+### Sub-Task [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200653409861926",
+                        "assignee": {
+                            "gid": "1127028096108896",
+                            "resource_type": "user"
+                        },
+                        "completed": true,
+                        "name": "cobra-101 (part 1 setup project)"
+                    },
+                    {
+                        "gid": "1200653409861948",
+                        "assignee": {
+                            "gid": "1127028096108896",
+                            "resource_type": "user"
+                        },
+                        "completed": false,
+                        "name": "cobra-101 (part 2 create command)"
+                    }
+                ]
+            }
