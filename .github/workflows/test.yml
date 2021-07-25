@@ -20,7 +20,7 @@ jobs:
       - name: Run APIB in background
         working-directory: mock
         run: |
-          yarn & yarn mock &
+          yarn && yarn mock &
 
       - name: Run Test
         run: make test-cov
