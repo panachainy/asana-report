@@ -1,0 +1,126 @@
+FORMAT: 1A
+HOST:  https://app.asana.com/api/1.1
+
+# ASANA
+
+## Project [/projects?workspace=1127028194303123]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200195508767749",
+                        "name": "Learning",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200485948764582",
+                        "name": "Vuejs+Lalarvel",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200485948764589",
+                        "name": "DevOPS",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200486577426704",
+                        "name": "Golang",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200486577426721",
+                        "name": "JAVA",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200485948764592",
+                        "name": "Tech Lead",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200495219773252",
+                        "name": "Github",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200520558756397",
+                        "name": "Golang-cobra",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200556977511232",
+                        "name": "asana-report",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200564492567071",
+                        "name": "Vuejs",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200569493185459",
+                        "name": "digital-ocean",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200575424624266",
+                        "name": "read",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200195560177006",
+                        "name": "Code traning",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200195560177012",
+                        "name": "Gitbook",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200635348570247",
+                        "name": "lint bot / line oa",
+                        "resource_type": "project"
+                    }
+                ],
+                "next_page": null
+            }
+
+## Project [/projects/1200195508767749/tasks?opt_fields=completed,name,assignee,num_subtasks]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200616651608041",
+                        "assignee": {
+                            "gid": "1127028096108896",
+                            "resource_type": "user"
+                        },
+                        "completed": false,
+                        "name": "quicktype-vscode",
+                        "num_subtasks": 0
+                    },
+                    {
+                        "gid": "1200195560177014",
+                        "assignee": {
+                            "gid": "1127028096108896",
+                            "resource_type": "user"
+                        },
+                        "completed": false,
+                        "name": "เรียบเรียงว่าจะเขียนอะไรบ้าง",
+                        "num_subtasks": 2
+                    }
+                ]
+            }
