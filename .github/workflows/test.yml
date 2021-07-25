@@ -23,7 +23,7 @@ jobs:
       - name: Run APIB in background
         working-directory: mock
         run: |
-          yarn
+          yarn install --frozen-lockfile
           yarn mock &
 
       - name: Run Test
