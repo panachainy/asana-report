@@ -24,10 +24,12 @@ try:
 	~/bin/asar version
 
 test:
-	go test -cover ./...
+	go test -v -cover ./...
 
 test-cov:
-	go test -race -covermode=atomic -coverprofile=covprofile ./...
+	go test -v -race -covermode=atomic -coverprofile=covprofile ./...
+
+test-ci: test-cov cov-func
 
 cov-htm:
 	go tool cover -html=covprofile

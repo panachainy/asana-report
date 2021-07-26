@@ -11,8 +11,14 @@ import (
 
 var client = resty.New()
 
-func InitService() {
-	client.SetHostURL(util.GLOBAL_CONFIG.AsanaUrl)
+func InitService(asanaUrl ...string) {
+	url := util.GLOBAL_CONFIG.AsanaUrl
+
+	if len(asanaUrl) > 0 {
+		url = asanaUrl[0]
+	}
+
+	client.SetHostURL(url)
 }
 
 func GetTasks(projectId string, token string) model.Tasks {
@@ -34,7 +40,7 @@ func GetTasks(projectId string, token string) model.Tasks {
 	}
 
 	if response.StatusCode() != http.StatusOK {
-		errorString := fmt.Sprintf("Something wrong from asana status code is %v at getTasks()\n", response.StatusCode())
+		errorString := fmt.Sprintf("Something wrong from asana status code is %v at GetTasks()\n", response.StatusCode())
 		panic(errorString)
 	}
 

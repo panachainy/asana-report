@@ -13,10 +13,24 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go-version }}
+
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Run APIB in background
+        working-directory: mock
+        run: |
+          yarn install --frozen-lockfile
+          yarn mock &
+
       - name: Run Test
-        run: make test-cov
+        run: make test-ci
+
       - name: Send coverage
         uses: shogo82148/actions-goveralls@v1
         with:
