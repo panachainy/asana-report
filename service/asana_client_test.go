@@ -4,6 +4,8 @@ import (
 	"asana-report/model"
 	"reflect"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_GetTasks(t *testing.T) {
@@ -220,11 +222,26 @@ func Test_GetWorkspace(t *testing.T) {
 			}
 			`),
 		},
+		{
+			name:        "404 Not found",
+			workspaceId: "wrong-workspace-id",
+			token:       "",
+			mockFunc: func() {
+			},
+			expectingErr: true,
+		},
 	}
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(tt *testing.T) {
 			tc.mockFunc()
+
+			if tc.expectingErr {
+				// TODO: improve to each panic case
+				assert.Panics(t, func() { GetWorkspace(tc.workspaceId, tc.token) }, "The code did not panic")
+				return
+			}
+
 			tasksResult := GetWorkspace(tc.workspaceId, tc.token)
 
 			if !reflect.DeepEqual(tc.expected, tasksResult) {
