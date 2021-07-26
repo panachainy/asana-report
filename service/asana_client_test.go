@@ -251,3 +251,50 @@ func Test_GetWorkspace(t *testing.T) {
 		})
 	}
 }
+
+func Test_UpdateTasks_Success(t *testing.T) {
+	InitService("http://localhost:3500")
+
+	tests := []struct {
+		name            string
+		taskId          string
+		assigneeId      string
+		token           string
+		mockFunc        func()
+		expectingErr    bool
+		expectingErrMsg string
+	}{
+		{
+			name:       "Success",
+			taskId:     "111",
+			assigneeId: "assignee-mock",
+			token:      "111",
+			mockFunc: func() {
+			},
+		},
+		{
+			name:       "404 Not found",
+			taskId:     "worng-task-id",
+			assigneeId: "assignee-mock",
+			token:      "",
+			mockFunc: func() {
+			},
+			expectingErr:    true,
+			expectingErrMsg: "Something wrong from asana status code is 404 at UpdateTasks()\n",
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(tt *testing.T) {
+			tc.mockFunc()
+
+			if tc.expectingErr {
+				assert.PanicsWithValue(t, tc.expectingErrMsg, func() { UpdateTasks(tc.taskId, tc.assigneeId, tc.token) }, "The code did not panic or mistake message of panic")
+				return
+			}
+
+			UpdateTasks(tc.taskId, tc.assigneeId, tc.token)
+		})
+	}
+}
+
