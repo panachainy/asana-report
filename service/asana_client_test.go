@@ -70,12 +70,13 @@ func Test_GetSubTasks(t *testing.T) {
 	InitService("http://localhost:3500")
 
 	tests := []struct {
-		name         string
-		projectId    string
-		token        string
-		mockFunc     func()
-		expected     model.Tasks
-		expectingErr bool
+		name            string
+		projectId       string
+		token           string
+		mockFunc        func()
+		expected        model.Tasks
+		expectingErr    bool
+		expectingErrMsg string
 	}{
 		{
 			name:      "Success",
@@ -108,11 +109,26 @@ func Test_GetSubTasks(t *testing.T) {
 			}
 			`),
 		},
+		{
+			name:      "404 Not found",
+			projectId: "wrong-workspace-id",
+			token:     "",
+			mockFunc: func() {
+			},
+			expectingErr:    true,
+			expectingErrMsg: "Something wrong from asana status code is 404 at GetSubTasks()\n",
+		},
 	}
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(tt *testing.T) {
 			tc.mockFunc()
+
+			if tc.expectingErr {
+				assert.PanicsWithValue(t, tc.expectingErrMsg, func() { GetSubTasks(tc.projectId, tc.token) }, "The code did not panic or mistake message of panic")
+				return
+			}
+
 			tasksResult := GetSubTasks(tc.projectId, tc.token)
 
 			if !reflect.DeepEqual(tc.expected, tasksResult) {
