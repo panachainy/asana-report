@@ -40,7 +40,7 @@ func GetTasks(projectId string, token string) model.Tasks {
 	}
 
 	if response.StatusCode() != http.StatusOK {
-		errorString := fmt.Sprintf("Something wrong from asana status code is %v at getTasks()\n", response.StatusCode())
+		errorString := fmt.Sprintf("Something wrong from asana status code is %v at GetTasks()\n", response.StatusCode())
 		panic(errorString)
 	}
 
