@@ -126,12 +126,13 @@ func Test_GetWorkspace(t *testing.T) {
 	InitService("http://localhost:3500")
 
 	tests := []struct {
-		name         string
-		workspaceId  string
-		token        string
-		mockFunc     func()
-		expected     model.Workspace
-		expectingErr bool
+		name            string
+		workspaceId     string
+		token           string
+		mockFunc        func()
+		expected        model.Workspace
+		expectingErr    bool
+		expectingErrMsg string
 	}{
 		{
 			name:        "Success",
@@ -228,7 +229,8 @@ func Test_GetWorkspace(t *testing.T) {
 			token:       "",
 			mockFunc: func() {
 			},
-			expectingErr: true,
+			expectingErr:    true,
+			expectingErrMsg: "Something wrong from asana status code is 404 at getWorkspace()\n",
 		},
 	}
 
@@ -237,8 +239,7 @@ func Test_GetWorkspace(t *testing.T) {
 			tc.mockFunc()
 
 			if tc.expectingErr {
-				// TODO: improve to each panic case
-				assert.Panics(t, func() { GetWorkspace(tc.workspaceId, tc.token) }, "The code did not panic")
+				assert.PanicsWithValue(t, tc.expectingErrMsg, func() { GetWorkspace(tc.workspaceId, tc.token) }, "The code did not panic or mistake message of panic")
 				return
 			}
 
