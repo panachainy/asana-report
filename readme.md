@@ -1,6 +1,6 @@
 # Asana report
 
-[![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=main)](https://coveralls.io/github/panachainy/asana-report?branch=main)
+[![Coverage Status](https://coveralls.io/repos/github/panachainy/asana-report/badge.svg?branch=main)](https://coveralls.io/github/panachainy/asana-report?branch=main) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=panachainy_asana-report&metric=alert_status)](https://sonarcloud.io/dashboard?id=panachainy_asana-report)
 
 ASAR make for easy to get progress of all your task in each project under workspace, In my use case I need to track all task each project in one command.
 
