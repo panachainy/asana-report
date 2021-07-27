@@ -27,15 +27,15 @@ test:
 	go test -v -cover ./...
 
 test-cov:
-	go test -v -race -covermode=atomic -coverprofile=covprofile ./...
+	go test -v -race -covermode=atomic -coverprofile=coverage.out ./...
 
 test-ci: test-cov cov-func
 
 cov-htm:
-	go tool cover -html=covprofile
+	go tool cover -html=coverage.out
 
 cov-func:
-	go tool cover -func=covprofile
+	go tool cover -func=coverage.out
 
 try-env:
 	export ASAR_PROJECT_BASE=project_base_test && export ASAR_PORT=80 && go run main.go version
