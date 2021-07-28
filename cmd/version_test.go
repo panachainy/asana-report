@@ -21,7 +21,7 @@ func Test_versionCmd(t *testing.T) {
 	versionCmd.SetArgs(argsTmp) // set command args
 
 	if err := versionCmd.Execute(); err != nil {
-		assert.FailNowf(t, "Failed to execute 'helloCmd.Execute()'.", "Error msg: %v", err)
+		assert.FailNowf(t, "Failed to execute 'versionCmd.Execute()'.", "Error msg: %v", err)
 	}
 
 	expect = "asar development\n"
