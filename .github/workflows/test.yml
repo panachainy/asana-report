@@ -29,12 +29,15 @@ jobs:
           yarn mock &
 
       - name: Run Test
-        run: make test-ci
+        run: |
+          make test-ci
+          go test -json > report.json ./...
 
       - name: Send coverage
         uses: shogo82148/actions-goveralls@v1
         with:
-          path-to-profile: covprofile
+          path-to-profile: coverage.out
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
