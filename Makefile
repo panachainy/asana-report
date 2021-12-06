@@ -16,9 +16,12 @@ build: clean
 version:
 	@echo $(VERSION)
 
-install:
+install.script:
 	install -d -m 755 '$(HOME)/bin/'
 	install $(PATH_BUILD)$(VERSION)/$(FILE_ARCH)/$(FILE_COMMAND) '$(HOME)/bin/$(FILE_COMMAND)'
+
+install:
+	make build && make install.script
 
 try:
 	~/bin/asar version
