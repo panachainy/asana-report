@@ -66,7 +66,7 @@ HOST:  https://app.asana.com/api/1.1
                 ]
             }
 
-## GET Project with task [/projects/1200195508767749/tasks?opt_fields=completed,name,assignee,num_subtasks]
+## GET Project with task 2 [/projects/1200195508767749/tasks?opt_fields=completed,name,assignee,num_subtasks]
 
 ### Project [GET]
 
@@ -91,11 +91,31 @@ HOST:  https://app.asana.com/api/1.1
                         "num_subtasks": 0
                     },
                     {
-                        "gid": "1200195559276078",
+                        "gid": "111",
                         "assignee": { "gid": "1127028096108896", "resource_type": "user" },
                         "completed": true,
                         "name": "Research Workflow",
                         "num_subtasks": 3
+                    }
+                ]
+            }
+
+## GET Project with task 3 [/projects/1200485948764582/tasks?opt_fields=completed,name,assignee,num_subtasks]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "22323",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": false,
+                        "name": "mock ja",
+                        "num_subtasks": 0
                     }
                 ]
             }
