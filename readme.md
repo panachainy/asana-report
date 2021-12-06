@@ -80,12 +80,6 @@ Run with development
 go run main.go
 ```
 
-Build
-
-```sh
-make build
-```
-
 Install
 
 ```sh
