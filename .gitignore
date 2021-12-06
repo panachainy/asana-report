@@ -3,7 +3,8 @@ asar
 build
 
 # coverage
-covprofile
+coverage.out
+report.json
 
 .env
 

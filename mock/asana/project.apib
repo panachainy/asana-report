@@ -1,0 +1,121 @@
+FORMAT: 1A
+HOST:  https://app.asana.com/api/1.1
+
+# ASANA
+
+## Project [/projects?workspace=111]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200195508767749",
+                        "name": "Learning",
+                        "resource_type": "project"
+                    },
+                    {
+                        "gid": "1200485948764582",
+                        "name": "Vuejs+Lalarvel",
+                        "resource_type": "project"
+                    }
+                ],
+                "next_page": null
+            }
+
+## Project 404 case [/projects?workspace=wrong-workspace-id]
+
+### Project 404 case [GET]
+
++ Response 404
+
+## Project with task 1 [/projects/111/tasks?opt_fields=completed,name,assignee,num_subtasks]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200616651608041",
+                        "assignee": {
+                            "gid": "1127028096108896",
+                            "resource_type": "user"
+                        },
+                        "completed": false,
+                        "name": "quicktype-vscode",
+                        "num_subtasks": 0
+                    },
+                    {
+                        "gid": "1200195560177014",
+                        "assignee": {
+                            "gid": "1127028096108896",
+                            "resource_type": "user"
+                        },
+                        "completed": false,
+                        "name": "เรียบเรียงว่าจะเขียนอะไรบ้าง",
+                        "num_subtasks": 2
+                    }
+                ]
+            }
+
+## GET Project with task 2 [/projects/1200195508767749/tasks?opt_fields=completed,name,assignee,num_subtasks]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200520558821272",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": false,
+                        "name": "landscape stack https://landscape.cncf.io/",
+                        "num_subtasks": 0
+                    },
+                    {
+                        "gid": "1200527959150567",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": true,
+                        "name": "jenkins 101 https://www.youtube.com/watch?v=7KCS70sCoK0&ab_channel=TechWorldwithNana",
+                        "num_subtasks": 0
+                    },
+                    {
+                        "gid": "111",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": true,
+                        "name": "Research Workflow",
+                        "num_subtasks": 3
+                    }
+                ]
+            }
+
+## GET Project with task 3 [/projects/1200485948764582/tasks?opt_fields=completed,name,assignee,num_subtasks]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "22323",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": false,
+                        "name": "mock ja",
+                        "num_subtasks": 0
+                    }
+                ]
+            }

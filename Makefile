@@ -1,4 +1,4 @@
-VERSION=0.0.3
+VERSION=0.0.5
 PATH_BUILD=build/
 FILE_COMMAND=asar
 FILE_ARCH=darwin_amd64
@@ -16,35 +16,40 @@ build: clean
 version:
 	@echo $(VERSION)
 
-install:
+install.script:
 	install -d -m 755 '$(HOME)/bin/'
 	install $(PATH_BUILD)$(VERSION)/$(FILE_ARCH)/$(FILE_COMMAND) '$(HOME)/bin/$(FILE_COMMAND)'
+
+install:
+	make build && make install.script
 
 try:
 	~/bin/asar version
 
 test:
-	go test -cover ./...
+	go test -v -cover ./...
 
-test-cov:
-	go test -race -covermode=atomic -coverprofile=covprofile ./...
+test.cov:
+	go test -v -race -covermode=atomic -coverprofile=coverage.out ./...
 
-cov-htm:
-	go tool cover -html=covprofile
+test.ci: test.cov cov.func
 
-cov-func:
-	go tool cover -func=covprofile
+cov.htm:
+	go tool cover -html=coverage.out
 
-try-env:
+cov.func:
+	go tool cover -func=coverage.out
+
+try.env:
 	export ASAR_PROJECT_BASE=project_base_test && export ASAR_PORT=80 && go run main.go version
 
-try-file:
+try.file:
 	go run main.go --config ./.env version
 
 ast:
 	go run main.go ast
 
-ast-c:
+ast.c:
 	go run main.go --config ./.env ast
 
 apib:

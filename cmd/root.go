@@ -32,4 +32,5 @@ func init() {
 
 func initConfig() {
 	util.Init(cfgFile, rootCmd.Use)
+	util.InitLogrus()
 }

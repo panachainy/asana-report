@@ -4,7 +4,7 @@ jobs:
   build:
     strategy:
       matrix:
-        go-version: [1.14.x, 1.15.x, 1.16.x]
+        go-version: [1.15.x, 1.16.x, 1.17.x]
         platform: [ubuntu-latest]
     runs-on: ${{ matrix.platform }}
 
@@ -13,11 +13,33 @@ jobs:
         uses: actions/setup-go@v1
         with:
           go-version: ${{ matrix.go-version }}
+
       - name: Checkout Repository
         uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Run APIB in background
+        working-directory: mock
+        run: |
+          yarn install --frozen-lockfile
+          yarn mock &
+
       - name: Run Test
-        run: make test-cov
+        run: |
+          make test.ci
+          go test -json > report.json ./...
+
       - name: Send coverage
         uses: shogo82148/actions-goveralls@v1
         with:
-          path-to-profile: covprofile
+          path-to-profile: coverage.out
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
