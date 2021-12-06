@@ -4,6 +4,7 @@ build
 
 # coverage
 coverage.out
+report.json
 
 .env
 

@@ -10,66 +10,71 @@ import (
 
 var isFullReportAST bool
 
-var astCmd = &cobra.Command{
-	Use:   "ast",
-	Short: "Get task status",
-	Long:  ``,
-	Run: func(cmd *cobra.Command, args []string) {
-		service.InitService()
-		var response model.AstResponse
+var astCmd = createAstCmd()
 
-		workspaceId := util.GLOBAL_CONFIG.WorkspaceId
-		token := util.GLOBAL_CONFIG.Token
+func createAstCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "ast",
+		Short: "Get task status",
+		Long:  ``,
+		Run: func(cmd *cobra.Command, args []string) {
+			service.InitService()
+			var response model.AstResponse
 
-		util.PrintConfig(cmd)
+			workspaceId := util.GLOBAL_CONFIG.WorkspaceId
+			token := util.GLOBAL_CONFIG.Token
 
-		cmd.Println("================================================")
+			util.PrintConfig(cmd)
 
-		workspace := service.GetWorkspace(workspaceId, token)
+			cmd.Println("================================================")
 
-		for _, project := range workspace.Project {
-			cmd.Printf("Project: %v in progress...\n", project.Name)
+			workspace := service.GetWorkspace(workspaceId, token)
 
-			taskCompleted := 0
-			countSubTask := 0
-			countSubTaskCompleted := 0
-			tasks := service.GetTasks(project.Gid, token)
+			for _, project := range workspace.Project {
+				cmd.Printf("Project: %v in progress...\n", project.Name)
 
-			for _, task := range tasks.Data {
+				taskCompleted := 0
+				countSubTask := 0
+				countSubTaskCompleted := 0
+				tasks := service.GetTasks(project.Gid, token)
 
-				if task.Completed {
-					taskCompleted++
-				}
+				for _, task := range tasks.Data {
 
-				if isFullReportAST {
-					cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
-				}
+					if task.Completed {
+						taskCompleted++
+					}
 
-				if task.NumSubTask != 0 {
-					subTasks := service.GetSubTasks(task.Gid, token)
+					if isFullReportAST {
+						cmd.Printf("  Task name: %v is %v\n", task.Name, task.Completed)
+					}
 
-					for _, subTask := range subTasks.Data {
-						countSubTask++
-						if subTask.Completed {
-							countSubTaskCompleted++
+					if task.NumSubTask != 0 {
+						subTasks := service.GetSubTasks(task.Gid, token)
+
+						for _, subTask := range subTasks.Data {
+							countSubTask++
+							if subTask.Completed {
+								countSubTaskCompleted++
+							}
 						}
 					}
 				}
+
+				astData := model.Ast{ProjectName: project.Name, TotalCompleted: taskCompleted, TotalTask: len(tasks.Data), TotalSubTask: countSubTask, TotalSubTaskCompleted: countSubTaskCompleted}
+				response.Data = append(response.Data, astData)
+
+				cmd.Println("Done.")
+				cmd.Println("================================================")
 			}
 
-			astData := model.Ast{ProjectName: project.Name, TotalCompleted: taskCompleted, TotalTask: len(tasks.Data), TotalSubTask: countSubTask, TotalSubTaskCompleted: countSubTaskCompleted}
-			response.Data = append(response.Data, astData)
+			response.SumCompleted, response.SumTask, response.SumSubTask, response.SumSubTaskCompleted = getSumCompletedAndTask(response.Data)
 
-			cmd.Println("Done.")
-			cmd.Println("================================================")
-		}
+			cmd.Println("All Done.")
 
-		response.SumCompleted, response.SumTask, response.SumSubTask, response.SumSubTaskCompleted = getSumCompletedAndTask(response.Data)
-
-		cmd.Println("All Done.")
-
-		printReport(cmd, response)
-	},
+			printReport(cmd, response)
+		},
+	}
+	return cmd
 }
 
 func init() {
