@@ -32,7 +32,7 @@ test:
 test.cov:
 	go test -v -race -covermode=atomic -coverprofile=coverage.out ./...
 
-test.ci: test-cov cov-func
+test.ci: test.cov cov.func
 
 cov.htm:
 	go tool cover -html=coverage.out
