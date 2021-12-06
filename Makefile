@@ -57,3 +57,6 @@ apib:
 
 asaa:
 	go run main.go asaa
+
+rasa:
+	go run main.go rasa
