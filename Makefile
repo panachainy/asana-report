@@ -1,4 +1,4 @@
-VERSION=0.0.5
+VERSION=0.0.6
 PATH_BUILD=build/
 FILE_COMMAND=asar
 FILE_ARCH=darwin_amd64
@@ -57,3 +57,6 @@ apib:
 
 asaa:
 	go run main.go asaa
+
+rasa:
+	go run main.go rasa
