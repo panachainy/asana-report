@@ -25,7 +25,21 @@ curl "{{baseUrl}}/tasks/{{task_gid}}/subtasks?opt_fields=completed,name,assignee
   -H "Authorization: Bearer {{token}}"
 
 ### PUT Task
+curl -X PUT "http://localhost:3500/tasks/111" \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer 111" \
+  -d '{"data": {"assignee":"assignee-mock"} }'
+
+### PUT Task 2
 curl -X PUT "{{baseUrl}}/tasks/{{task_gid}}" \
   -H 'Content-Type: application/json' \
   -H "Authorization: Bearer {{token}}" \
   -d '{"data": {"assignee":"{{assigneeId}}"} }'
+
+### PUT Delete assignee
+
+curl -X PUT "{{baseUrl}}/tasks/{{task_gid}}" \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H "Authorization: Bearer {{token}}" \
+  -d '{"data": {"assignee":"null"} }'
