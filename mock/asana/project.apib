@@ -33,7 +33,7 @@ HOST:  https://app.asana.com/api/1.1
 
 + Response 404
 
-## Project [/projects/111/tasks?opt_fields=completed,name,assignee,num_subtasks]
+## Project with task 1 [/projects/111/tasks?opt_fields=completed,name,assignee,num_subtasks]
 
 ### Project [GET]
 
@@ -62,6 +62,40 @@ HOST:  https://app.asana.com/api/1.1
                         "completed": false,
                         "name": "เรียบเรียงว่าจะเขียนอะไรบ้าง",
                         "num_subtasks": 2
+                    }
+                ]
+            }
+
+## GET Project with task [/projects/1200195508767749/tasks?opt_fields=completed,name,assignee,num_subtasks]
+
+### Project [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "data": [
+                    {
+                        "gid": "1200520558821272",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": false,
+                        "name": "landscape stack https://landscape.cncf.io/",
+                        "num_subtasks": 0
+                    },
+                    {
+                        "gid": "1200527959150567",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": true,
+                        "name": "jenkins 101 https://www.youtube.com/watch?v=7KCS70sCoK0&ab_channel=TechWorldwithNana",
+                        "num_subtasks": 0
+                    },
+                    {
+                        "gid": "1200195559276078",
+                        "assignee": { "gid": "1127028096108896", "resource_type": "user" },
+                        "completed": true,
+                        "name": "Research Workflow",
+                        "num_subtasks": 3
                     }
                 ]
             }
