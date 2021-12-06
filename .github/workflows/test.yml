@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Test
         run: |
-          make test-ci
+          make test.ci
           go test -json > report.json ./...
 
       - name: Send coverage
